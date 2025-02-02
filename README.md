@@ -1,30 +1,29 @@
 # Backup Management
 
 ## Current Setup
-- Daily kopia snapshot at 4am: `/home/drose`
+- Daily kopia snapshot of entire system (/)
 - Repository: `/mnt/nas/backups`
-- Logs in `backup.log`
+- Exclusions in `kopia-excludes.txt`
 
 ## Backup Sources
-- `/home` (286G used)
-- `/gemini` (6.1T used)
-- `/rocket` (mostly empty, new)
-- `/reel` (47G used)
+- Full root filesystem (/) with smart exclusions
+- Key areas:
+  - System configs and software
+  - User data and settings
+  - Custom configurations
+  - Important documents
 
 ## Include/Exclude
-Include:
-- Personal configs (~/.config, ~/.local)
-- Custom scripts and tools
-- Important documents
-- System configs (/etc)
-
-Skip:
-- Git repos (.git)
-- Conda envs
-- AI models/datasets
-- System dirs (/dev, /proc, /sys, /tmp, /run, /mnt, /media)
-- Logs and cache (/var/log, /var/cache)
+See `kopia-excludes.txt` for detailed exclusions:
+- Virtual/temp filesystems
+- Regeneratable data (caches, docker, etc)
+- Separate mount points
+- Development artifacts
 
 ## Quick Reference
 - Check recent: `kopia snapshot list --show-identical=false`
 - GUI available on desktop
+- Recovery process:
+  1. Fresh Ubuntu install
+  2. Mount NAS
+  3. Restore system files

@@ -1,0 +1,35 @@
+# Virtual/temp filesystems
+/proc/**
+/sys/**
+/dev/**
+/run/**
+/tmp/**
+
+# Regeneratable data
+/var/cache/**
+/var/log/**
+/var/lib/docker/**
+/var/lib/snapd/**
+
+# Mount points
+/mnt/**
+/media/**
+/gemini/**
+/rocket/**
+/reel/**
+
+# Package manager and temp files
+**/*.deb
+**/*.tmp
+**/*.temp
+**/*.swp
+**/.git/objects/**
+
+# Conda environments
+/home/**/miniconda3/envs/**
+/home/**/anaconda3/envs/**
+
+# Dev caches
+**/node_modules/**
+**/__pycache__/**
+**/.pytest_cache/**
