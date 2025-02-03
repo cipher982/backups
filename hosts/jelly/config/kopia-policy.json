@@ -15,8 +15,8 @@
         "oneFileSystem": true
     },
     "errorHandling": {
-        "ignoreFileErrors": false,
-        "ignoreDirectoryErrors": false,
+        "ignoreFileErrors": true,
+        "ignoreDirectoryErrors": true,
         "ignoreUnknownTypes": true
     },
     "scheduling": {
