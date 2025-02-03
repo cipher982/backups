@@ -15,15 +15,17 @@
 
 ## Backup Architecture
 
-### Jelly (Home Server) 🏃
+### Jelly (Home Server) ✅
 - Root filesystem (/) backup (~105GB)
 - Targets (in priority order):
   - ✅ Local HDD (`/mnt/nas/backups`)
   - 🔜 Synology NAS (via Tailscale)
   - 📅 B2 Cloud (planned)
-- Current: Kopia GUI scheduler
-- Planned: Migration to CLI + systemd
-- Exclusions in `hosts/jelly/config/kopia-excludes.txt`
+- Implementation: CLI + systemd
+- Configuration:
+  - Exclusions: `hosts/jelly/config/kopia-excludes.txt`
+  - Policy: `hosts/jelly/config/kopia-policy.json`
+  - Schedule: Daily at 3 AM via systemd timer
 
 ### Clifford (Hetzner VPS) ✅
 - Root filesystem (/) backup (~20GB compressed)
