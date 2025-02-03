@@ -1,29 +1,41 @@
 # Backup Management
 
-## Current Setup
+## Repository Structure
+```
+.
+├── hosts/
+│   ├── jelly/          # Home server
+│   │   ├── config/     # Kopia config and scripts
+│   │   └── logs/       # Backup logs
+│   └── clifford/       # Hetzner VPS
+│       ├── config/     # Kopia config and scripts
+│       └── logs/       # Backup logs
+└── shared/             # Shared configurations and scripts
+```
+
+## Hosts
+
+### Jelly (Home Server)
 - Daily kopia snapshot of entire system (/)
 - Repository: `/mnt/nas/backups`
-- Exclusions in `kopia-excludes.txt`
+- Exclusions in `hosts/jelly/config/kopia-excludes.txt`
 
-## Backup Sources
-- Full root filesystem (/) with smart exclusions
-- Key areas:
+### Clifford (Hetzner VPS)
+- Configuration pending
+- Will use B2 for remote storage
+
+## Common Configuration
+- Full root filesystem (/) backup with smart exclusions
+- Key areas backed up:
   - System configs and software
   - User data and settings
   - Custom configurations
   - Important documents
 
-## Include/Exclude
-See `kopia-excludes.txt` for detailed exclusions:
-- Virtual/temp filesystems
-- Regeneratable data (caches, docker, etc)
-- Separate mount points
-- Development artifacts
-
 ## Quick Reference
 - Check recent: `kopia snapshot list --show-identical=false`
-- GUI available on desktop
 - Recovery process:
-  1. Fresh Ubuntu install
-  2. Mount NAS
-  3. Restore system files
+  1. Fresh OS install
+  2. Install kopia
+  3. Connect to backup repository
+  4. Restore system files
