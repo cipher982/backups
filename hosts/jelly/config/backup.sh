@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ########################################################
-# This is not in use at the moment, using GUI server.
+# This is not in use at the moment, using GUI server. 
+# TO DEPRECATE
 ########################################################
 
 # Run backup
