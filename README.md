@@ -25,14 +25,17 @@
 - Planned: Migration to CLI + systemd
 - Exclusions in `hosts/jelly/config/kopia-excludes.txt`
 
-### Clifford (Hetzner VPS) 🆕
-- Root filesystem (/) backup
+### Clifford (Hetzner VPS) ✅
+- Root filesystem (/) backup (~20GB compressed)
 - Targets (in priority order):
-  - 🔜 Local disk (`/mnt/backup`, 60GB)
+  - ✅ Local disk (`/mnt/backup`, 60GB)
   - 🔜 Synology NAS (via Tailscale)
   - 📅 B2 Cloud (planned)
 - Implementation: CLI + systemd
-- Configuration pending
+- Configuration:
+  - Exclusions: `hosts/clifford/config/kopia-excludes.txt`
+  - Policy: `hosts/clifford/config/kopia-policy.json`
+  - Schedule: Daily at 3 AM via systemd timer
 
 ### Synology NAS 🆕
 - Central off-site backup location
