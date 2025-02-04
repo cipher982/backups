@@ -19,13 +19,14 @@
 - Root filesystem (/) backup (~105GB)
 - Targets (in priority order):
   - ✅ Local HDD (`/mnt/nas/backups`)
-  - 🔜 Synology NAS (via Tailscale)
+  - ✅ Synology NAS (via Tailscale)
   - 📅 B2 Cloud (planned)
 - Implementation: CLI + systemd
 - Configuration:
   - Exclusions: `hosts/jelly/config/kopia-excludes.txt`
   - Policy: `hosts/jelly/config/kopia-policy.json`
   - Schedule: Daily at 3 AM via systemd timer
+  - Replication: Automatic after backup via `kopia-replicate.service`
 
 ### Clifford (Hetzner VPS) ✅
 - Root filesystem (/) backup (~20GB compressed)
@@ -39,15 +40,19 @@
   - Policy: `hosts/clifford/config/kopia-policy.json`
   - Schedule: Daily at 3 AM via systemd timer
 
-### Synology NAS 🆕
+### Synology NAS ✅
 - Central off-site backup location
 - Receives backups via Tailscale from:
-  - 🔜 Jelly
+  - ✅ Jelly (`/drose/backups/kopia_sync`)
   - 🔜 Clifford
 - Benefits:
   - True off-site storage
   - Fast access via Tailscale
   - No egress costs
+- Implementation:
+  - Native Kopia replication
+  - SSH key authentication
+  - Automatic sync after backups
 
 ### B2 Cloud Storage 📅
 - Final tier disaster recovery
@@ -64,6 +69,7 @@
 
 ## Quick Reference
 - Check recent: `kopia snapshot list --show-identical=false`
+- Check replication: `kopia repository sync-to sftp --host=richmcbnas --username=richmcb --path=/drose/backups/kopia_sync --keyfile=$HOME/.ssh/id_ed25519 --known-hosts=$HOME/.ssh/known_hosts --delete`
 - Recovery process:
   1. Fresh OS install
   2. Install kopia
