@@ -26,7 +26,7 @@
   - Exclusions: `hosts/jelly/config/kopia-excludes.txt`
   - Policy: `hosts/jelly/config/kopia-policy.json`
   - Schedule: Daily at 3 AM via systemd timer
-  - Replication: Automatic after backup via `kopia-replicate.service`
+  - Replication: Automatic after backup via `kopia-sync.service`
 
 ### Clifford (Hetzner VPS) ✅
 - Root filesystem (/) backup (~20GB compressed)
