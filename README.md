@@ -16,7 +16,7 @@
 ## Backup Architecture
 
 ### Jelly (Home Server) ✅
-- Root filesystem (/) backup (~105GB)
+- Root filesystem (/) backup (~108.5GB)
 - Targets (in priority order):
   - ✅ Local HDD (`/mnt/nas/backups`)
   - ✅ Synology NAS (via Tailscale)
@@ -47,16 +47,19 @@
 ### Synology NAS ✅
 - Central off-site backup location
 - Receives backups via Tailscale from:
-  - ✅ Jelly (`/drose/backups/kopia_sync`)
+  - ✅ Jelly (`/drose/backups/jelly`)
   - 🔜 Clifford
 - Benefits:
   - True off-site storage
   - Fast access via Tailscale
   - No egress costs
 - Implementation:
-  - Native Kopia replication
+  - Direct SFTP repository sync
   - SSH key authentication
   - Automatic sync after backups
+- Path Structure:
+  - SFTP access: `/drose/backups/...`
+  - Filesystem: `/volume1/homes/richmcb/drose/backups/...`
 
 ### B2 Cloud Storage 📅
 - Final tier disaster recovery
@@ -72,8 +75,9 @@
   - Important documents
 
 ## Quick Reference
-- Check recent: `kopia snapshot list --show-identical=false --all`
-- Check replication: `kopia repository sync-to sftp --host=richmcbnas --username=richmcb --path=/drose/backups/kopia_sync --keyfile=$HOME/.ssh/id_ed25519 --known-hosts=$HOME/.ssh/known_hosts --delete`
+- Check status: `./hosts/jelly/config/check-kopia.sh`
+- Check recent: `sudo -u root kopia snapshot list --show-identical=false --all`
+- Check replication: `sudo -u root kopia repository sync-to sftp --host=richmcbnas --username=richmcb --path=/drose/backups/jelly --keyfile=$HOME/.ssh/id_ed25519 --known-hosts=$HOME/.ssh/known_hosts --delete`
 - Recovery process:
   1. Fresh OS install
   2. Install kopia
