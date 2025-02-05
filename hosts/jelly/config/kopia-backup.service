@@ -5,7 +5,7 @@ Wants=network-online.target kopia-sync.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/kopia snapshot create --parallel=16 /
+ExecStart=/usr/bin/kopia snapshot create --parallel=16 --exclude-file=/home/drose/git/backups/hosts/jelly/config/kopia-excludes.txt /
 User=root
 
 [Install]
