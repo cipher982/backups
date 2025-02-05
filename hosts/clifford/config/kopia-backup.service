@@ -5,8 +5,13 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/kopia snapshot create --parallel=16 /
 User=root
+Environment="KOPIA_CHECK_FOR_UPDATES=false"
+ExecStartPre=/bin/chown -R drose:drose /mnt/backup/kopia
+ExecStart=/usr/bin/kopia snapshot create --parallel=8 --ignore-file=/home/drose/git/backups/hosts/clifford/config/kopia-excludes.txt /
+ExecStartPost=/bin/chown -R drose:drose /mnt/backup/kopia
+StandardOutput=append:/var/log/kopia-backup.log
+StandardError=append:/var/log/kopia-backup.log
 
 [Install]
 WantedBy=multi-user.target 

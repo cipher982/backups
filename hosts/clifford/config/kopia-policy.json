@@ -47,10 +47,7 @@
             "ignored": 5
         },
         "entries": {
-            "snapshotted": 0,
-            "ignored": 5,
-            "cacheHit": 0,
-            "cacheMiss": 0
+            "ignored": 5
         }
     },
     "upload": {

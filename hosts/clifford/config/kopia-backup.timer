@@ -1,5 +1,6 @@
 [Unit]
 Description=Run Kopia Backup Daily
+Requires=kopia-backup.service
 
 [Timer]
 OnCalendar=*-*-* 03:00:00

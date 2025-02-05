@@ -29,16 +29,20 @@
   - Replication: Automatic after backup via `kopia-sync.service`
 
 ### Clifford (Hetzner VPS) ✅
-- Root filesystem (/) backup (~20GB compressed)
+- Root filesystem (/) backup (~21GB compressed)
 - Targets (in priority order):
-  - ✅ Local disk (`/mnt/backup`, 60GB)
+  - ✅ Local disk (`/mnt/backup`, 64GB)
+    - Auto-mounted via fstab
+    - Repository initialized and working
+    - Proper permissions handled by systemd service
   - 🔜 Synology NAS (via Tailscale)
   - 📅 B2 Cloud (planned)
 - Implementation: CLI + systemd
 - Configuration:
-  - Exclusions: `hosts/clifford/config/kopia-excludes.txt`
-  - Policy: `hosts/clifford/config/kopia-policy.json`
-  - Schedule: Daily at 3 AM via systemd timer
+  - ✅ Daily backups at 3 AM via systemd timer
+  - ✅ Minimal exclusions (virtual fs, tmp, docker special files)
+  - ✅ Policy configured for retention and compression
+  - 🔜 Replication setup needed
 
 ### Synology NAS ✅
 - Central off-site backup location
@@ -68,7 +72,7 @@
   - Important documents
 
 ## Quick Reference
-- Check recent: `kopia snapshot list --show-identical=false`
+- Check recent: `kopia snapshot list --show-identical=false --all`
 - Check replication: `kopia repository sync-to sftp --host=richmcbnas --username=richmcb --path=/drose/backups/kopia_sync --keyfile=$HOME/.ssh/id_ed25519 --known-hosts=$HOME/.ssh/known_hosts --delete`
 - Recovery process:
   1. Fresh OS install

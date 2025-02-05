@@ -1,36 +1,18 @@
-# Virtual/temp filesystems
+# Virtual filesystems (recreated on boot)
 /proc/**
 /sys/**
 /dev/**
 /run/**
+
+# Temporary files
 /tmp/**
 
-# Regeneratable data
-/var/cache/**
-/var/log/**
-/var/lib/docker/**
-/var/lib/snapd/**
+# Backup mount (avoid recursive backup)
+/mnt/backup/**
 
-# Mount points (including our backup mount)
-/mnt/**
-/media/**
-
-# Package manager and temp files
-**/*.deb
-**/*.tmp
-**/*.temp
-**/*.swp
-**/.git/objects/**
-
-# Conda environments
-/home/**/miniconda3/envs/**
-/home/**/anaconda3/envs/**
-
-# Dev caches
-**/node_modules/**
-**/__pycache__/**
-**/.pytest_cache/**
-
-# Database data (often better backed up separately)
-/var/lib/mongodb/**
-/var/lib/postgresql/** 
+# Docker special files (to avoid errors)
+/var/lib/docker/overlay2/**/work/work/#*
+/var/lib/docker/volumes/backingFsBlockDev
+/var/lib/docker/**/control
+/var/lib/docker/**/.s.PGSQL.*
+/var/lib/docker/**/fifo
