@@ -62,7 +62,10 @@
   - SSH key authentication
   - Automatic sync after backups
 - Path Structure:
-  - SFTP access: `/drose/backups/...`
+  - SFTP access: `/drose/backups/...` or `/homes/richmcb/drose/backups/...`
+  - Both paths work and point to same location
+  - Jelly uses `/drose/backups/jelly` (working, ~3.4GB compressed)
+  - Clifford uses `/homes/richmcb/drose/backups/clifford` (more explicit path)
   - Filesystem: `/volume1/homes/richmcb/drose/backups/...`
 
 ### B2 Cloud Storage 📅
