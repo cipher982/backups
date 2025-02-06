@@ -39,14 +39,14 @@
     - Auto-mounted via fstab
     - Repository initialized and working
     - Proper permissions handled by systemd service
-  - 🔜 Synology NAS (via Tailscale)
+  - ✅ Synology NAS (via Tailscale)
   - 📅 B2 Cloud (planned)
 - Implementation: CLI + systemd
 - Configuration:
   - ✅ Daily backups at 3 AM via systemd timer
   - ✅ Minimal exclusions (virtual fs, tmp, docker special files)
   - ✅ Policy configured for retention and compression
-  - 🔜 Replication setup needed
+  - ✅ Replication setup and working
 
 ### Synology NAS ✅
 - Central off-site backup location

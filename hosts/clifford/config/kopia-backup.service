@@ -1,14 +1,14 @@
 [Unit]
 Description=Kopia Backup Service
 After=network-online.target
-Wants=network-online.target
+Wants=network-online.target kopia-sync.service
 
 [Service]
 Type=oneshot
 User=root
 Environment="KOPIA_CHECK_FOR_UPDATES=false"
 ExecStartPre=/bin/chown -R drose:drose /mnt/backup/kopia
-ExecStart=/usr/bin/kopia snapshot create --parallel=8 --ignore-file=/home/drose/git/backups/hosts/clifford/config/kopia-excludes.txt /
+ExecStart=/usr/bin/kopia snapshot create --parallel=8 /
 ExecStartPost=/bin/chown -R drose:drose /mnt/backup/kopia
 StandardOutput=append:/var/log/kopia-backup.log
 StandardError=append:/var/log/kopia-backup.log
